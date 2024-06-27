@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+/* Variables */
+$font-family-primary: 'Arial, sans-serif';
+$default-font-size: 16px;
+
+/* Global styles */
+body {
+  font-family: $font-family-primary;
+  font-size: $default-font-size;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 2em; // 32px par défaut
+}
+
+h2 {
+  font-size: 1.5em; // 24px par défaut
+}
+
+h3 {
+  font-size: 1.17em; // 18.72px par défaut
+}
+
+h4 {
+  font-size: 1em; // 16px par défaut
+}
+
+h5 {
+  font-size: 0.83em; // 13.28px par défaut
+}
+
+h6 {
+  font-size: 0.67em; // 10.72px par défaut
+}
+
+p, ul, ol {
+  margin: 0 0 1em 0;
+}
+
+ul {
+  list-style-type: none;
+}

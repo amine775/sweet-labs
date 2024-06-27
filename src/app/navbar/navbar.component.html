@@ -1,0 +1,44 @@
+<header>
+    <h1>Bienvenue dans votre boutique gourmande</h1>
+    <nav>
+        @if(!isDisplayMenu) {
+            <div class="menu-burger">
+                <button id="burger-button" (click)="toggleDisplayMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                    <span>Menu</span>
+                </button>
+            </div>
+        } @else {
+            <div class="close-menu">
+                <button id="close-menu-button" (click)="toggleDisplayMenu()">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
+        }
+        <div class="menu-utilities">
+            <h2>Sweet Lab's</h2>
+            <div>
+                <div id="utility-contact">
+                    <span>
+                        Contactez-nous
+                    </span>
+                </div>
+                <div>
+                    <button>
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="menu" [ngClass]="{'menu-inactive' : !isDisplayMenu}">
+            <div class="placeholder" (click)="toggleDisplayMenu()"></div>
+            <ul>
+                <li><a routerLink="">Accueil</a></li>
+                <li><a routerLink="">Notre catalogue</a></li>
+                <li><a routerLink="">Vos évènements</a></li>
+                <li><a routerLink="">Qui sommes nous</a></li>
+                <li><a routerLink="">Contactez-nous</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
