@@ -1,3 +1,64 @@
 <app-carousel></app-carousel>
+<div class="features-container">
+    <div class="features-info">
+        <h3>Chez Sweet Lab's</h3>
+        <div class="features-info-text">
+            <p>Nous sommes spécialisés dans la confection de desserts de haute qualité pour les professionnels.
+                Que vous soyez un restaurant, un hôtel ou une entreprise, nos créations pâtissières sauront ravir vos clients et apporter une touche gourmande à votre établissement.</p>
+            <p>Pour les événements particuliers, nous réalisons des gâteaux sur mesure qui feront de chaque occasion un moment inoubliable.
+                Mariages, anniversaires, fêtes d'entreprise, chaque gâteau est unique et personnalisé selon vos envies.</p>
+            <p>Notre mission est de transformer vos rêves sucrés en réalité avec des créations qui allient esthétisme et saveur.
+                Faites confiance à notre expertise pour des desserts et des gâteaux qui émerveilleront vos invités et clients.</p>
+        </div>
+        <div class="show-more">
+            @if(!showMoreFeature) {
+            <i class="fa-solid fa-chevron-down" (click)="toggleShowMoreFeature()"></i>
+            } @else {
+                <i class="fa-solid fa-chevron-up" (click)="toggleShowMoreFeature()"></i>
+            }
+        </div>
+     </div>
+    <div>
+        <div class="features-photo-container">
+            <div class="features-photo">
+                <div>
+                    <img src="/image/evenement.webp" alt="">
+                    <div>
+                        <p>Vos évènements</p>
+                    </div>
+                </div>
+            </div>
+            <div class="features-photo-info">
+                <p>Confiez nous la confection de vos gateaux pour des évènements gourmands</p>
+            </div>
+            <div class="features-photo-info">
+                <p>Les desserts Sweet Lab's sont fait maison avec amour</p>
+            </div>
+            <div class="features-photo">
+                <div>
+                    <img src="/image/dessert.webp" alt="">
+                    <div>
+                        <p>Nos desserts pour vos boutique</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <app-category></app-category>
+<div class="home-made-container">
+    <h3>La qualité avant tout</h3>
+    <div>
+        <p>
+            Chaque jour, nous fabriquons nos produits avec passion, en utilisant uniquement des ingrédients frais et locaux.
+            Nous suivons des processus d'hygiène stricts pour garantir que chaque création est non seulement délicieuse mais aussi sûre pour votre santé.
+        </p>
+        <p>
+            Laissez-vous séduire par nos desserts aux goûts originaux, conçus pour offrir une expérience gustative unique et inoubliable.
+        </p>
+        <p>
+            Choisissez Sweet Lab's pour la qualité, la fraîcheur et l'innovation culinaire dans chacun de nos produits faits maison.
+        </p>
+    </div>
+</div>
 <app-best-seller></app-best-seller>
