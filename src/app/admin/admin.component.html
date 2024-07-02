@@ -1,0 +1,15 @@
+<div class="main">
+    <h2>Espace Administrateur</h2>
+
+    <div class="container">
+        <div class="option-features">
+            <div id="addFeature" class="feature feature-active" (click)="selectFeature('addFeature')">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div id="updateFeature" class="feature" (click)="selectFeature('updateFeature')">
+                <i class="fa-solid fa-pen"></i>
+            </div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

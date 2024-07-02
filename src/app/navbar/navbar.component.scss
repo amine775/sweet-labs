@@ -64,6 +64,17 @@ header {
       justify-content: space-between;
       margin: 20px;
 
+      a:nth-child(1) {
+        margin-right: 15px;
+      }
+
+      .menu-icons {
+        display: flex;
+        > .exit {
+          cursor: pointer;
+        }
+      }
+
       > h2 {
         font-size: 20px;
         min-width: 103px;
@@ -144,6 +155,7 @@ button {
 /* Utility contact styles */
 #utility-contact {
   display: none;
+  margin-right: 20px;
 }
 
 /* Media Queries */

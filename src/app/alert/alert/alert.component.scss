@@ -1,0 +1,56 @@
+$success-color: #c4f0c4;
+$error-color: #f39898;
+
+
+.container {
+    height: 0px;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    > .alert-container {
+        height: 50px;
+        min-width: 300px;
+        max-width: 600px;
+        border-radius: 40px;
+        flex-grow: 1;
+        color:black;
+        margin: 0 50px;
+        animation: showBlock 8s;
+        opacity: 0;
+        align-content: center;
+        > p {
+            text-align: center;
+            align-content: center;
+            margin: 0;
+        }
+    }
+    > .alert-container.success {
+        background-color: $success-color;
+    }
+    > .alert-container.error {
+        background-color: $error-color;
+    }
+}
+
+@keyframes showBlock {
+    0% {
+        display: none; 
+        transform: translateY(-20px);
+        opacity: 0; 
+    }
+    10% {
+        display: block; 
+        transform: translateY(40px);
+        opacity: 1; 
+    }
+    90% {
+        transform: translateY(40px);
+        opacity: 1; 
+    }
+    100% {
+        display: none; 
+        transform: translateY(-20px);
+        opacity: 0; 
+    }
+}

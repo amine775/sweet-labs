@@ -18,15 +18,31 @@
         <div class="menu-utilities">
             <h2>Sweet Lab's</h2>
             <div>
+            @if(authService.isAuthenticated$ | async;) {
+                <div>
+                    <a routerLink="admin">Admin</a>
+                </div>
+            } @else {
                 <div id="utility-contact">
                     <span>
                         Contactez-nous
                     </span>
                 </div>
-                <div>
-                    <button>
+            }
+                <div class="menu-icons">
+                    <a routerLink="">
                         <i class="fa-regular fa-heart"></i>
-                    </button>
+                    </a>   
+                    @if(authService.isAuthenticated$ | async;) {
+                        <a routerLink="/home" (click)="logout()" class="exit">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                        </a>
+                    } @else {
+                        <a routerLink="/login">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                    }
+                    
                 </div>
             </div>
         </div>

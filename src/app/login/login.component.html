@@ -1,0 +1,22 @@
+<div class="container">
+    <form class="login-container" [formGroup]="loginForm" (ngSubmit)="submit()">
+
+    <div class="login-label">
+        <h3>Veuillez vous connecter</h3>
+    </div>
+        <div class="input-container">
+            <label for="username">
+                <p>Nom de compte : </p>
+                <input id="username" type="text" formControlName="username">
+            </label>
+        </div>
+        <div class="input-container">
+            <label for="password">
+                <p>Mot de passe : </p>
+                <input id="password" type="password" formControlName="password">
+            </label>
+        </div>
+        <p class="error">{{error}}</p>
+        <input type="submit" [disabled]="!loginForm.valid" class="button-submit">
+    </form>
+</div>

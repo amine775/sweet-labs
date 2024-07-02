@@ -1,6 +1,8 @@
 /* Variables */
 $font-family-primary: 'Arial, sans-serif';
 $default-font-size: 16px;
+$text-color: rgb(71, 70, 70);
+$main-color: #fcbfcb;
 
 /* Global styles */
 body {
@@ -8,6 +10,7 @@ body {
   font-size: $default-font-size;
   margin: 0;
   padding: 0;
+  color: $text-color;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -46,3 +49,111 @@ p, ul, ol {
 ul {
   list-style-type: none;
 }
+
+a:link {
+  color: $text-color;
+}
+
+a:visited {
+  color: $text-color;
+}
+
+.error {
+  color: rgb(232, 45, 45);
+}
+
+
+.button-submit{
+  align-items: center;
+  appearance: none;
+  background-color: #fff;
+  border-radius: 24px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  fill: currentcolor;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  will-change: transform,opacity;
+  z-index: 0;
+}
+
+.button-submit:hover {
+  background: #f3f3f3;
+  color: #f4baba;
+}
+
+.button-submit:active {
+  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+  outline: none;
+}
+
+.button-submit:focus {
+  outline: none;
+  border: 2px solid $main-color;
+}
+
+.button-submit:not(:disabled) {
+  box-shadow: $main-color 0 1px 3px 0, $main-color 0 4px 8px 3px;
+}
+
+.button-submit:disabled:hover {
+  outline: none;
+  color: rgb(60 64 67 / 30%);
+  cursor: not-allowed;
+}
+
+.loader-container {
+  margin: 10px;
+  height: 10px;
+  width: 10px;
+}
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 3px solid $main-color;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 19px;
+  height: 12px;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: #FF3D00 transparent;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
