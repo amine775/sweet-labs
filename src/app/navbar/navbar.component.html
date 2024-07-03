@@ -1,22 +1,22 @@
 <header>
-    <h1>Bienvenue dans votre boutique gourmande</h1>
+
     <nav>
         @if(!isDisplayMenu) {
-            <div class="menu-burger">
-                <button id="burger-button" (click)="toggleDisplayMenu()">
-                    <i class="fa-solid fa-bars"></i>
-                    <span>Menu</span>
-                </button>
-            </div>
-        } @else {
-            <div class="close-menu">
-                <button id="close-menu-button" (click)="toggleDisplayMenu()">
-                    <i class="fa-regular fa-circle-xmark"></i>
-                </button>
-            </div>
+            
         }
+        <div class="menu-burger"  [style.opacity]="isDisplayMenu ? '0%' : '100%'">
+            <button id="burger-button" (click)="toggleDisplayMenu()">
+                <i class="fa-solid fa-bars"></i>
+                <span>Menu</span>
+            </button>
+        </div>
+
+
+        <div class="title">
+            <h1 routerLink="home">Sweet Lab's</h1>
+        </div>
+       
         <div class="menu-utilities">
-            <h2>Sweet Lab's</h2>
             <div>
             @if(authService.isAuthenticated$ | async;) {
                 <div>
@@ -29,6 +29,8 @@
                     </span>
                 </div>
             }
+
+
                 <div class="menu-icons">
                     <a routerLink="">
                         <i class="fa-regular fa-heart"></i>
@@ -46,8 +48,17 @@
                 </div>
             </div>
         </div>
-        <div class="menu" [ngClass]="{'menu-inactive' : !isDisplayMenu}">
-            <div class="placeholder" (click)="toggleDisplayMenu()"></div>
+       
+    </nav>
+    <div class="menu" [ngClass]="{'menu-inactive' : !isDisplayMenu}">
+        <div class="placeholder" (click)="toggleDisplayMenu()"></div>
+       
+        <div>
+            <div class="close-menu">
+                <button id="close-menu-button" (click)="toggleDisplayMenu()">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
             <ul>
                 <li><a routerLink="">Accueil</a></li>
                 <li><a routerLink="">Notre catalogue</a></li>
@@ -56,5 +67,6 @@
                 <li><a routerLink="">Contactez-nous</a></li>
             </ul>
         </div>
-    </nav>
+        
+    </div>
 </header>

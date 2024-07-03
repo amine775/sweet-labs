@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-category',
   standalone: true,
   imports: [],
-  templateUrl: './category.component.html',
-  styleUrl: './category.component.scss'
+  templateUrl: './categories.component.html',
+  styleUrl: './categories.component.scss'
 })
-export class CategoryComponent  {
+export class CategoriesComponent  {
 
 }

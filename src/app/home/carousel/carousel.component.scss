@@ -1,34 +1,93 @@
 .carousel-container {
     width: 100%;
-    height: 250px;
+    height: 700px;
     display: flex;
+    position: relative;
     > .carousel-item {
         display: flex;
         flex-grow: 1;
+        justify-content: center;
         > video {
             width: 100%;
+            object-fit: cover;
+            height: 700px;
+        }
+        > .carousel-text {
+            color: white;
+            position: absolute;
+            bottom: 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 550px;
+            justify-content: center;
+            >.title  {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 40px;
+                > h1 {
+                    margin: 0;
+                    height: 55px;
+                    font-style: italic;
+                    font-weight: 200;
+                    font-size: 70px;
+                    letter-spacing: -5px;
+                    margin-bottom: 10px;
+                }
+                > span {
+                    color: #f160ac;
+                    text-align: center;
+                }
+                
+            }
+            .carousel-description {
+                text-align: center;
+                max-width: 300px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    > .carousel-logo {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        img {
+            height: 150px;
         }
     }
 }
 
 
 @media only screen and (min-width: 600px) {
-    .carousel-container {
-        height: 350px;
-    }
+    
 }
 
 @media only screen and (min-width: 768px) {
-    .carousel-container {
-        height: 450px;
-    }
+    
+    
 }
 
 @media only screen and (min-width: 992px) {
+    .carousel-container {
+        height: 850px;
+
+    > .carousel-item {
+        > video {
+            height: 850px;
+            object-fit: cover;
+        }
+    }
+        
+    }
 }
 
 @media only screen and (min-width: 1200px) {
-    .carousel-container {
-        height: 550px;
-    }
 }

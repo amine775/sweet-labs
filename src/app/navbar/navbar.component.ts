@@ -17,7 +17,7 @@ export class NavbarComponent {
   isDisplayMenu = false;
 
   toggleDisplayMenu() {
-    this.isDisplayMenu = ! this.isDisplayMenu;
+    this.isDisplayMenu = !this.isDisplayMenu;
   }
 
   logout() {
