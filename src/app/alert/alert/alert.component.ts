@@ -31,7 +31,6 @@ export class AlertComponent implements OnInit, OnDestroy {
 
     this.subscription = this.alertService.getAlert()
       .subscribe(message => {
-        console.log(message)
         switch (message && message.type) {
           case 'success':
             this.showAlert('success')

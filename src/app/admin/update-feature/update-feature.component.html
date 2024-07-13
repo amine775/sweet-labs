@@ -1,0 +1,208 @@
+
+
+<div class="card">
+    <p-toast />
+<p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+        <p-button 
+            pRipple 
+            severity="success" 
+            label="New" 
+            icon="pi pi-plus" 
+            class="mr-2" 
+            (click)="openNew()" />
+        <p-button 
+            pRipple
+            severity="danger" 
+            label="Delete" 
+            icon="pi pi-trash" 
+            (click)="deleteSelectedDesserts()" 
+            [disabled]="!selectedDesserts || !selectedDesserts.length" />
+    </ng-template>
+</p-toolbar>
+
+<p-table
+    #dt
+    [value]="desserts"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['label', 'recipe', 'price', 'category']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedDesserts"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="{first} de {last} sur {totalRecords} au total"
+    [showCurrentPageReport]="true"
+>
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <h5 class="m-0">Gérer desserts</h5>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input 
+                    pInputText 
+                    type="text" 
+                    (input)="applyFilterGlobal($event , 'contains')" 
+                    placeholder="Rechercher..." />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 4rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th>
+                Image
+            </th>
+            <th pSortableColumn="name" style="min-width:15rem">
+                Libellé <p-sortIcon field="name"/>
+            </th>
+            <th pSortableColumn="recipe">
+                Recette <p-sortIcon field="recipe" />
+            </th>
+            <th pSortableColumn="price">
+                Prix <p-sortIcon field="price" />
+            </th>
+            <th pSortableColumn="category" style="min-width:10rem">
+                Catégorie <p-sortIcon field="category" />
+            </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dessert>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="dessert" />
+            </td>
+            <td>
+                @if(dessert.imageUri !== undefined && dessert.imageUri.length > 0) {
+                    <img [ngSrc]="dessert.imageUri" [alt]="dessert.category" width="50"  height="50" contain
+                    class="shadow-4">
+                } @else {
+                    <i class="pi pi-image" style="font-size: 2rem"></i>
+                }
+
+            </td>
+            <td>
+                {{ dessert.label }}
+            </td>
+            <td>
+                {{ dessert.recipe }}
+            </td>
+            <td>
+                {{ dessert.price | currency : 'EUR' }}
+            </td>
+            <td>
+                {{ dessert.category }}
+            </td>
+            <td>
+                <p-button 
+                    pRipple 
+                    icon="pi pi-pencil" 
+                    class="mr-2" 
+                    [rounded]="true" 
+                    [outlined]="true" 
+                    (click)="showEditDialog(dessert)" />
+                <p-button 
+                    pRipple 
+                    icon="pi pi-trash" 
+                    [rounded]="true" 
+                    [outlined]="true" 
+                    (click)="deleteDessert(dessert)" />
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            Il y a {{ desserts ? desserts.length : 0 }} produits au total.
+        </div>
+    </ng-template>
+</p-table>
+
+<p-dialog 
+        [(visible)]="dessertDialog" 
+        [style]="{ width: '450px' }" 
+        header="Dessert" 
+        [modal]="true" 
+        styleClass="p-fluid">
+            <ng-template pTemplate="content">
+
+                <div class="field">
+                    <label for="label">Image</label>
+                    <input type="file" id="label" (change)="onFileChange($event)" required>
+                    <small class="p-error" *ngIf="submitted && !newFile">
+                        L'image est requis.
+                    </small>
+                </div>
+                <div class="field">
+                    <label for="label">Libellé</label>
+                    <input 
+                        type="text" 
+                        pInputText 
+                        id="label" 
+                        [(ngModel)]="dessert.label" 
+                        required 
+                        autofocus />
+                    <small class="p-error" *ngIf="submitted && !dessert.label">
+                        Le libellé est requis.
+                    </small>
+                </div>
+                <div class="field">
+                    <label for="recipe">Recipe</label>
+                    <textarea 
+                        id="recipe" 
+                        pInputTextarea 
+                        [(ngModel)]="dessert.recipe" 
+                        required 
+                        rows="3" 
+                        cols="20">
+                    </textarea>
+                </div>
+                <div class="field">
+                    <label for="price">Prix</label>
+                    <input 
+                        type="number" 
+                        pInputText 
+                        id="price" 
+                        [(ngModel)]="dessert.price" 
+                        autofocus />
+                </div>
+
+                <div class="field">
+                    <label class="mb-3">Catégorie</label>
+                    <div class="formgrid grid">
+
+                        @for (category of categories; track $index) {
+                            <div class="field-radiobutton col-6">
+                                <p-radioButton 
+                                    id="category{{$index}}" 
+                                    name="category" 
+                                    [value]="category" 
+                                    [(ngModel)]="dessert.category" />
+                                <label for="category{{$index}}" >{{category}}</label>
+                            </div> 
+                        }
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <p-button 
+                    pRipple 
+                    label="Cancel" 
+                    icon="pi pi-times" 
+                    [text]="true" 
+                    (click)="hideDialog()" />
+                <p-button 
+                    pRipple 
+                    label="Save" 
+                    icon="pi pi-check" 
+                    [text]="true" 
+                    (click)="saveDessert()" />
+            </ng-template>
+    </p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }" />
+</div>
+

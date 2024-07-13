@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
-import { Observable, catchError, from, of, switchMap,  } from 'rxjs';
+import { Storage, getDownloadURL, ref, uploadBytes, deleteObject } from '@angular/fire/storage';
+import { error } from 'console';
+import { Observable, catchError, from,  switchMap,  } from 'rxjs';
 import * as uuid from 'uuid';
 
 
@@ -32,6 +33,17 @@ export class StorageService {
         throw error;
       })
     );
+  }
+
+  removeFile(uri: string):Observable<any> {
+    const fileRef = ref(this.firebaseStorage, uri);
+    const task = deleteObject(fileRef)
+
+    return from(task).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    )
   }
 
 }
