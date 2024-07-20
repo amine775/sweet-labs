@@ -36,18 +36,17 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   first = 0
   last = 0;
-  rows: number = 10;
+  rows: number = 10;  
   totalRecords: number = 0;
   desserts$ : Observable<Dessert[] | undefined>;
   lastDoc : Dessert | undefined;
   firstDoc : Dessert | undefined;
   margin: any;
   filterValue: string = '';
-  categoriesFilter: string[] = [];
+  $categoriesFilter: WritableSignal<string[]> = signal(['Tiramisu', 'Brownie', 'Cheesecake', 'Cookie'])
   currentPage: number = 1
   isLoading = false
   $askedPaged : WritableSignal<number> =  signal(0);
-
   subscriptions: Subscription[] = []
 
   ngOnInit(): void {
@@ -62,8 +61,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.updateValues()
     )
-
-    this.firestoreService.countDesserts().then((value) => {
+    this.firestoreService.countDesserts(this.$categoriesFilter()).then((value) => {
       this.totalRecords = value;
     });
   }
@@ -86,12 +84,14 @@ export class CatalogComponent implements OnInit, OnDestroy {
     if (this.last === this.totalRecords) {
       return;
     } 
+    
     if (this.lastDoc) {
-      this.desserts$ = this.firestoreService.fetchNextPage(this.rows, this.lastDoc)
+      this.desserts$ = this.firestoreService.fetchNextPage(this.rows, this.lastDoc, this.$categoriesFilter())
       this.subscriptions.push(
         this.updateValues()
       )
       this.$askedPaged.set(this.$askedPaged() + 1)
+      
       return;
     }
   }
@@ -101,22 +101,22 @@ export class CatalogComponent implements OnInit, OnDestroy {
       return;
     }
     if (this.firstDoc) {
-      console.log(this.firstDoc)
-      this.desserts$ = this.firestoreService.fetchPreviousPage(this.rows, this.firstDoc)
+      this.desserts$ = this.firestoreService.fetchPreviousPage(this.rows, this.firstDoc, this.$categoriesFilter())
       this.subscriptions.push(
         this.updateValues()
       )
-      console.log(this.$askedPaged())
       this.$askedPaged.set(this.$askedPaged() - 1)
-      console.log(this.$askedPaged())
       return;
     }
   }
 
-  filter() {}
-
   getFirstPage():Observable<Dessert[] | undefined> {
-    return this.firestoreService.fetchNextPage(this.rows, undefined);
+    this.firestoreService.countDesserts(this.$categoriesFilter()).then((value) => {
+      this.totalRecords = value;
+    });
+
+    this.desserts$ = this.firestoreService.fetchNextPage(this.rows, undefined, this.$categoriesFilter())
+    return this.desserts$;
   }
 
   getNumberOfPage() {
@@ -143,10 +143,9 @@ export class CatalogComponent implements OnInit, OnDestroy {
       this.lastDoc = newDesserts?.pop()
       this.firstDoc = newDesserts?.at(0)
 
-      console.log(this.firstDoc)
-
       this.first = this.$askedPaged() * this.rows + 1
       this.last = this.first + newDesserts!.length 
     })
+    
   }
 }

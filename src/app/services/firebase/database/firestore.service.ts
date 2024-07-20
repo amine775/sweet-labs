@@ -26,7 +26,7 @@ import {
   tap,
 } from 'rxjs';
 import { Dessert } from '../../../domains/dessert';
-import { endAt, getDoc, limitToLast } from 'firebase/firestore';
+import { endAt, getDoc, limitToLast, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -119,16 +119,18 @@ export class FirestoreService implements OnInit {
     );
   }
 
-  async countDesserts(): Promise<number> {
-    const desserts = collection(this.firestore, this.DESSERT_COLLECTION);
-    const dessertsSnapshots = await getCountFromServer(desserts);
+  async countDesserts(filter:string[]): Promise<number> {
+    const dessertsCollection = collection(this.firestore, this.DESSERT_COLLECTION);
+    const q = query(dessertsCollection, where('category', 'in', filter))
+    const dessertsSnapshots = await getCountFromServer(q);
     return dessertsSnapshots.data().count;
   }
 
   fetchNextPage(
     pageSize: number,
-    lastDocumentOfCurrentPage: Dessert | undefined
-  ):Observable<Dessert[] | undefined> {
+    lastDocumentOfCurrentPage: Dessert | undefined,
+    filter: string[]
+  ): Observable<Dessert[] | undefined> {
     const collectionRef = collection(this.firestore, this.DESSERT_COLLECTION);
 
     if (lastDocumentOfCurrentPage) {
@@ -143,6 +145,7 @@ export class FirestoreService implements OnInit {
           const queryRef = query(
             collectionRef,
             orderBy('id'),
+            where('category', 'in', filter),
             startAfter(docSnapshot),
             limit(pageSize)
           );
@@ -158,17 +161,26 @@ export class FirestoreService implements OnInit {
         })
       );
     } else {
-      return this.fetchFirstPage(pageSize).pipe(
+      return this.fetchFirstPage(pageSize, filter).pipe(
         tap((result) => {
           this.bsDesserts.next(result);
         })
-      )
+      );
     }
   }
 
-  fetchFirstPage(pageSize: number = 10): Observable<Dessert[] | undefined> {
+  fetchFirstPage(
+    pageSize: number = 10,
+    filter: string[]
+  ): Observable<Dessert[] | undefined> {
+    console.log(filter)
     const collectionRef = collection(this.firestore, this.DESSERT_COLLECTION);
-    const queryRef = query(collectionRef, orderBy('id'), limit(pageSize));
+    const queryRef = query(
+      collectionRef,
+      orderBy('id'),
+      where('category', 'in', filter),
+      limit(pageSize)
+    );
     return from(getDocs(queryRef)).pipe(
       map((querySnapshot) =>
         querySnapshot.docs.map((doc) => {
@@ -180,7 +192,11 @@ export class FirestoreService implements OnInit {
     );
   }
 
-  fetchPreviousPage(pageSize: number, firstDocumentOfCurrentPage: Dessert):Observable<Dessert[] | undefined> {
+  fetchPreviousPage(
+    pageSize: number,
+    firstDocumentOfCurrentPage: Dessert,
+    filter: string[]
+  ): Observable<Dessert[] | undefined> {
     const collectionRef = collection(this.firestore, this.DESSERT_COLLECTION);
 
     const docRef = doc(
@@ -188,13 +204,13 @@ export class FirestoreService implements OnInit {
       this.DESSERT_COLLECTION,
       firstDocumentOfCurrentPage.id
     );
-    console.log(firstDocumentOfCurrentPage.id)
 
     return from(getDoc(docRef)).pipe(
       switchMap((docSnapshot) => {
         const queryRef = query(
           collectionRef,
           orderBy('id'),
+          where('category', 'in', filter),
           endBefore(docSnapshot),
           limitToLast(pageSize)
         );
