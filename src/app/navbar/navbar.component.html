@@ -33,15 +33,18 @@
 
                 <div class="menu-icons">
                     <a routerLink="">
-                        <i class="fa-regular fa-heart"></i>
+                        <div class="favorite-icons">
+                            <p-badge [value]="productService.favoritesCount$ | async"></p-badge>
+                            <i class="pi pi-heart" style="font-size: 20px"></i>
+                        </div>
                     </a>   
                     @if(authService.isAuthenticated$ | async;) {
                         <a routerLink="/home" (click)="logout()" class="exit">
-                            <i class="fa-solid fa-right-to-bracket"></i>
+                            <i class="pi pi-sign-out" style="font-size: 20px"></i>
                         </a>
                     } @else {
                         <a routerLink="/login">
-                            <i class="fa-regular fa-user"></i>
+                            <i class="pi pi-user" style="font-size: 20px"></i>
                         </a>
                     }
                     

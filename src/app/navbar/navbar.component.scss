@@ -22,7 +22,7 @@ header {
   
 
   nav {
-    height: 30px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,7 +51,7 @@ header {
       height: 100%;
       > h1 {
         position: absolute;
-        font-size: 20px;
+        font-size: 30px;
         z-index: 1001;
         cursor: pointer;
       }
@@ -68,6 +68,20 @@ header {
         display: flex;
         > .exit {
           cursor: pointer;
+        }
+        > a {
+          .favorite-icons {
+            position: relative;
+            .p-element {
+              position: absolute;
+              top: -15px;
+              right: -15px;
+              opacity: 80%;
+              .p-badge {
+                background-color: red !important;
+              }
+            }
+          }
         }
       }
 

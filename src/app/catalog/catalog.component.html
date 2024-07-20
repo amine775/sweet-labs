@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="filter-container">
+    <div class="checkbox-container">
+      <p-checkbox
+        [(ngModel)]="categoriesFilter"
+        label="Tiramisu"
+        name="Tiramisu"
+        value="Tiramisu"
+      />
+      <p-checkbox
+        [(ngModel)]="categoriesFilter"
+        label="Brownie"
+        name="Brownie"
+        value="Brownie"
+      />
+      <p-checkbox
+        [(ngModel)]="categoriesFilter"
+        label="Cheesecake"
+        name="Cheesecake"
+        value="Cheesecake"
+      />
+      <p-checkbox
+        [(ngModel)]="categoriesFilter"
+        label="Cookie"
+        name="Cookie"
+        value="Cookie"
+      />
+    </div>
+    <div class="filter-subcontainer">
+      <div class="card flex justify-content-center">
+        <p-floatLabel>
+          <input pInputText id="filter" [(ngModel)]="filterValue" />
+          <label for="filter">Filtrer</label>
+        </p-floatLabel>
+      </div>
+      <p-button
+        icon="pi pi-search"
+        [rounded]="true"
+        severity="success"
+        (click)="filter()"
+      />
+    </div>
+  </div>
+  <p-divider />
+  <div class="desserts-container">
+    @if (desserts$  | async; as desserts ) {
+      @for (dessert of desserts; track dessert.id) {
+        <div class="card-container">
+          <p-card
+            [header]="dessert.label"
+            [subheader]="dessert.category"
+            [style]="{ width: '280px' }"
+          >
+            <ng-template pTemplate="header">
+              <img
+                alt="Card"
+                [src]="dessert.imageUri"
+                (error)="dessert.imageUri = ''"
+              />
+            </ng-template>
+            <p style="height: 50px">Recette : {{ dessert.recipe }}</p>
+            <ng-template pTemplate="footer">
+              <div class="flex gap-3 mt-1">
+                @if(!isFavorite(dessert)) {
+                <p-button
+                  label="Ajouter à mes favoris"
+                  class="w-full"
+                  styleClass="w-full"
+                  severity="success"
+                  (click)="addToFavorite(dessert)"
+                />
+                } @else {
+                <p-button
+                  label="Supprimer de mes favoris"
+                  class="w-full"
+                  styleClass="w-full"
+                  severity="danger"
+                  (click)="removeFromFavorite(dessert)"
+                />
+                }
+              </div>
+            </ng-template>
+          </p-card>
+        </div>
+        }
+        <div  class="paginator">
+          <p>De {{first}} à {{ last}} sur {{totalRecords}}</p>
+          <button [disabled]="shouldPreviousBeDisable()" (click)="previousPage()">
+            <i class="pi pi-chevron-left"></i>
+          </button>
+          <button [disabled]="shouldNextBeDisable()" (click)="nextPage()">
+            <i class="pi pi-chevron-right"></i>
+          </button>
+        </div>
+    }
+  </div>
+</div>
