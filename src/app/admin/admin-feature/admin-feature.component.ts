@@ -51,19 +51,11 @@ import { StorageService } from '../../services/firebase/storage/storage.service'
     InputNumberModule,
     NgOptimizedImage,
   ],
-  templateUrl: './update-feature.component.html',
-  styles: [
-    `
-      :host ::ng-deep .p-dialog .product-image {
-        width: 150px;
-        margin: 0 auto 2rem auto;
-        display: block;
-      }
-    `,
-  ],
+  templateUrl: './admin-feature.component.html',
+  styleUrl: 'admin-feature.component.scss',
   providers: [MessageService, ConfirmationService],
 })
-export class UpdateFeatureComponent implements OnInit {
+export class AdminFeatureComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
 
   firestore = inject(FirestoreService);

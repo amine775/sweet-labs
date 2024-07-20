@@ -17,12 +17,12 @@ export class AdminComponent {
     this.removeSelectedFeature();
     document.getElementById(featureId)?.classList.add(this.SELECTED_FEATURE_CLASS);
 
-    if(featureId === 'addFeature') {
-      this.router.navigate(['admin/add'])
+    if(featureId === 'admin-features') {
+      this.router.navigate(['admin/admin-features'])
       return;
     }
-    if(featureId === 'updateFeature') {
-      this.router.navigate(['admin/update'])
+    if(featureId === 'users-requests') {
+      this.router.navigate(['admin/users-requests'])
       return;
     }
   }

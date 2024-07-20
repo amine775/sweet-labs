@@ -1,8 +1,8 @@
 import { Route, RouterModule } from "@angular/router";
-import { AddFeatureComponent } from "./add-feature/add-feature.component";
 import { NgModule } from "@angular/core";
 import { AdminComponent } from "./admin.component";
-import { UpdateFeatureComponent } from "./update-feature/update-feature.component";
+import { AdminFeatureComponent } from "./admin-feature/admin-feature.component";
+import { UsersRequestsComponent } from "./users-requests/users-requests.component";
 
 export const routes: Route[] = [
     {
@@ -11,16 +11,16 @@ export const routes: Route[] = [
         children: [
           {
             path: '',
-            redirectTo: 'add',
+            redirectTo: 'admin-features',
             pathMatch: 'full'
           },
           {
-            path: 'add',
-            component: AddFeatureComponent
-          },
+            path: 'admin-features',
+            component: AdminFeatureComponent
+          }, 
           {
-            path: 'update',
-            component: UpdateFeatureComponent
+            path: 'users-requests', 
+            component: UsersRequestsComponent
           }
         ]
       }
