@@ -27,6 +27,7 @@ import {
 } from 'rxjs';
 import { Dessert } from '../../../domains/dessert';
 import { endAt, getDoc, limitToLast, where } from 'firebase/firestore';
+import { ContactRequest } from '../../../domains/contact-request';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,7 @@ export class FirestoreService implements OnInit {
 
   firestore = inject(Firestore);
   DESSERT_COLLECTION = 'dessert';
+  CONTACT_COLLECTION = 'contact';
 
   saveDessert(addDessertRequest: AddDessertRequest): Observable<void> {
     return from(
@@ -51,6 +53,22 @@ export class FirestoreService implements OnInit {
         price: addDessertRequest.price,
         imageUri: addDessertRequest.imageUri,
         category: addDessertRequest.category,
+      })
+    ).pipe(
+      catchError((err) => {
+        throw err;
+      })
+    );
+  }
+
+  saveContactRequest(addContactRequest: ContactRequest): Observable<void> {
+    return from(
+      setDoc(doc(this.firestore, this.CONTACT_COLLECTION, uuid.v4()), {
+        id: uuid.v4(),
+        email: addContactRequest.email,
+        phoneNumber: addContactRequest.phoneNumber,
+        details: addContactRequest.details,
+        isHandled: addContactRequest.isHandled
       })
     ).pipe(
       catchError((err) => {
