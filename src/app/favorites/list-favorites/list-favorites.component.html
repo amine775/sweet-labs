@@ -1,0 +1,13 @@
+<div class="favorites">
+  <ul>
+    @for (favorite of $favorites(); track favorite.id) {
+    <li class="favorite-item">
+      <img [src]="favorite.imageUri" [alt]="favorite.category" width="70">
+      <div class="favorite-details">
+        <p>{{favorite.category}}</p>
+        <p>{{favorite.label}}</p>
+      </div>
+    </li>
+    }
+  </ul>
+</div>
