@@ -146,6 +146,5 @@ export class CatalogComponent implements OnInit, OnDestroy {
       this.first = this.$askedPaged() * this.rows + 1
       this.last = this.first + newDesserts!.length 
     })
-    
   }
 }

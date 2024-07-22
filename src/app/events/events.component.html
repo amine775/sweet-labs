@@ -1,0 +1,181 @@
+<div class="container">
+  <div class="purpose-container">
+    <div class="grid grid-nogutter surface-section text-800">
+      <div
+        class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center"
+      >
+        <section>
+          <span class="block text-6xl font-bold mb-1">Commandez le gâteau</span>
+          <div class="text-6xl text-primary font-bold mb-3">
+            que vos invités méritent
+          </div>
+          <p class="mt-0 mb-4 text-700 line-height-3">
+            Contactez nous afin que nous puissions, ensemble, élaborer le gâteau
+            de votre choix
+          </p>
+          <button
+            pButton
+            pRipple
+            label="Demande de devis"
+            type="button"
+            class="p-button-outlined"
+          ></button>
+        </section>
+      </div>
+      <div class="col-12 md:col-6 overflow-hidden img-container">
+        <img
+          [src]="currentImage()"
+          alt="Image"
+          class="md:ml-auto block md:h-full"
+          style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)"
+        />
+        <div class="next">
+          <button
+            pButton
+            pRipple
+            label="Suivant"
+            type="button"
+            class="mr-3 p-button-raised"
+            (click)="next()"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-divider></p-divider>
+
+  <div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center">
+    <div class="mb-3 font-bold text-3xl">
+      <span class="text-900">Une envie, </span>
+      <span class="text-blue-600">Plein de saveurs</span>
+    </div>
+    <div class="text-700 mb-6">
+      Nous proposons un panel de saveur aux choix pour votre composition.
+    </div>
+    <div class="grid">
+      <div class="col-12 md:col-4 mb-4 px-5">
+        <span
+          class="p-3 shadow-2 mb-3 inline-block surface-card"
+          style="border-radius: 10px"
+        >
+          <img src="/image/apple.svg" alt="" width="30" />
+        </span>
+        <div class="text-900 text-xl mb-3 font-medium">Pomme</div>
+      </div>
+      <div class="col-12 md:col-4 mb-4 px-5">
+        <span
+          class="p-3 shadow-2 mb-3 inline-block surface-card"
+          style="border-radius: 10px"
+        >
+          <img src="/image/strawberry.svg" alt="" width="30" />
+        </span>
+        <div class="text-900 text-xl mb-3 font-medium">Fraise</div>
+      </div>
+      <div class="col-12 md:col-4 mb-4 px-5">
+        <span
+          class="p-3 shadow-2 mb-3 inline-block surface-card"
+          style="border-radius: 10px"
+        >
+          <img src="/image/chocolate.svg" alt="" width="30" />
+        </span>
+        <div class="text-900 text-xl mb-3 font-medium">Chocolat</div>
+      </div>
+      <div class="col-12 md:col-4 mb-4 px-5">
+        <span
+          class="p-3 shadow-2 mb-3 inline-block surface-card"
+          style="border-radius: 10px"
+        >
+          <img src="/image/hazelnut.svg" alt="" width="30" />
+        </span>
+        <div class="text-900 text-xl mb-3 font-medium">Noisette</div>
+      </div>
+      <div class="col-12 md:col-4 mb-4 px-5">
+        <span
+          class="p-3 shadow-2 mb-3 inline-block surface-card"
+          style="border-radius: 10px"
+        >
+          <img src="/image/lychee.svg" alt="" width="30" />
+        </span>
+        <div class="text-900 text-xl mb-3 font-medium">Lychee</div>
+      </div>
+      <div class="col-12 md:col-4 md:mb-4 mb-0 px-3">
+        <span
+          class="p-3 shadow-2 mb-3 inline-block surface-card"
+          style="border-radius: 10px"
+        >
+          <img src="/image/sugar.svg" alt="" width="30" />
+        </span>
+        <div class="text-900 text-xl mb-3 font-medium">Et bien d'autre...</div>
+        <span class="text-700 line-height-3"
+          >Faites nous part de vos goûts.. même les plus inavouable 😋</span
+        >
+      </div>
+    </div>
+  </div>
+  <p-divider></p-divider>
+
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6 quote-container">
+    <div class="text-center mb-5">
+      <img src="/image/logo.png" alt="Image" height="50" class="mb-3" />
+      <div class="text-900 text-3xl font-medium mb-3">Demandez un devis !</div>
+      <span class="text-600 font-medium line-height-3"
+        >Nous vous recontacterons rapidement</span
+      >
+    </div>
+
+    <form [formGroup]="quoteForm" (ngSubmit)="submit()">
+
+
+      <label for="name" class="block text-900 font-medium mb-2">Nom</label>
+      <input
+        id="name"
+        type="text"
+        placeholder="Nom"
+        pInputText
+        class="w-full mb-3"
+        formControlName="name"
+      />
+
+
+      <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+      <input
+        id="email1"
+        type="text"
+        placeholder="Adresse email"
+        pInputText
+        class="w-full mb-3"
+        formControlName="email"
+      />
+
+      <label for="phoneNumber" class="block text-900 font-medium mb-2"
+        >Numéro de téléphone</label
+      >
+      <input
+        id="phoneNumber"
+        type="text"
+        placeholder="Numéro de téléphone"
+        pInputText
+        class="w-full mb-3"
+        formControlName="phoneNumber"
+      />
+    
+      <label for="details"  class="block text-900 font-medium mb-2">Détails</label>
+      <textarea
+        id="details"
+        rows="5"
+        cols="51"
+        pInputTextarea
+        formControlName="details"
+        class="w-full mb-3"
+      ></textarea>
+
+      <button
+        pButton
+        pRipple
+        label="Envoyer"
+        icon="pi pi-send"
+        class="w-full"
+      ></button>
+    </form>
+  </div>
+</div>

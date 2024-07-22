@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.grid {
+    margin-top: 80px;
+}
+
+.img-container {
+    position: relative;
+    img {
+        object-fit: fill;
+        height: 400px;
+    }
+    > .next {
+        position: absolute;
+        bottom: 20px;
+        left: calc(50% - (120px / 2));
+        > .p-button-raised {
+            margin: 0 !important;
+            width: 120px !important;
+        }
+    }
+}
+
+.quote-container {
+    textarea {
+        margin-bottom: 20px;
+    }
+}
