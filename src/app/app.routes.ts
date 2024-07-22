@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { EventsComponent } from './events/events.component';
 import { ContactComponent } from './contact/contact.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,10 @@ export const routes: Routes = [
     {
         path: 'contact',
         component: ContactComponent
+    },
+    {
+        path: 'favorites', 
+        component: FavoritesComponent
     },
     {
         path: '**',

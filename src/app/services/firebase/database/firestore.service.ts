@@ -28,6 +28,7 @@ import {
 import { Dessert } from '../../../domains/dessert';
 import { endAt, getDoc, limitToLast, where } from 'firebase/firestore';
 import { ContactRequest } from '../../../domains/contact-request';
+import { Auth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,8 @@ export class FirestoreService implements OnInit {
   firestore = inject(Firestore);
   DESSERT_COLLECTION = 'dessert';
   CONTACT_COLLECTION = 'contact';
+
+  private fireAuth = inject(Auth);
 
   saveDessert(addDessertRequest: AddDessertRequest): Observable<void> {
     return from(
@@ -129,7 +132,7 @@ export class FirestoreService implements OnInit {
 
   deleteDessert(dessert: Dessert): Observable<any> {
     const docRef = doc(this.firestore, this.DESSERT_COLLECTION, dessert.id);
-
+    console.log(this.fireAuth.config.apiKey)
     return from(deleteDoc(docRef)).pipe(
       catchError((error) => {
         throw error;
