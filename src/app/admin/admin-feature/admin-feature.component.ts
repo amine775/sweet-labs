@@ -19,11 +19,10 @@ import { RippleModule } from 'primeng/ripple';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { FileUploadEvent, FileUploadModule } from 'primeng/fileupload';
+import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RatingModule } from 'primeng/rating';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { HttpClient } from '@angular/common/http';
 import { StorageService } from '../../services/firebase/storage/storage.service';
 
 @Component({
@@ -92,7 +91,7 @@ export class AdminFeatureComponent implements OnInit {
   newFile: File | null = null;
 
   ngOnInit(): void {
-    this.firestore.getAll().subscribe((desserts) => {
+    this.firestore.getAllDessert().subscribe((desserts) => {
       this.desserts = desserts;
     });
   }

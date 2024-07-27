@@ -26,9 +26,8 @@ import {
   tap,
 } from 'rxjs';
 import { Dessert } from '../../../domains/dessert';
-import { endAt, getDoc, limitToLast, where } from 'firebase/firestore';
+import { getDoc, limitToLast, where } from 'firebase/firestore';
 import { ContactRequest } from '../../../domains/contact-request';
-import { Auth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -45,17 +44,16 @@ export class FirestoreService implements OnInit {
   DESSERT_COLLECTION = 'dessert';
   CONTACT_COLLECTION = 'contact';
 
-  private fireAuth = inject(Auth);
-
   saveDessert(addDessertRequest: AddDessertRequest): Observable<void> {
+    let id = uuid.v4();
     return from(
-      setDoc(doc(this.firestore, this.DESSERT_COLLECTION, uuid.v4()), {
-        id: uuid.v4(),
+      setDoc(doc(this.firestore, this.DESSERT_COLLECTION, id), {
+        id: id,
         label: addDessertRequest.label,
         recipe: addDessertRequest.recipe,
         price: addDessertRequest.price,
         imageUri: addDessertRequest.imageUri,
-        category: addDessertRequest.category,
+        category: addDessertRequest.category
       })
     ).pipe(
       catchError((err) => {
@@ -65,12 +63,15 @@ export class FirestoreService implements OnInit {
   }
 
   saveContactRequest(addContactRequest: ContactRequest): Observable<void> {
+    let id = uuid.v4()
     return from(
-      setDoc(doc(this.firestore, this.CONTACT_COLLECTION, uuid.v4()), {
-        id: uuid.v4(),
+      setDoc(doc(this.firestore, this.CONTACT_COLLECTION, id), {
+        id: id,
+        name: addContactRequest.name,
         email: addContactRequest.email,
         phoneNumber: addContactRequest.phoneNumber,
         details: addContactRequest.details,
+        creationDate: new Date(),
         isHandled: addContactRequest.isHandled
       })
     ).pipe(
@@ -87,18 +88,6 @@ export class FirestoreService implements OnInit {
       updatedDessert.id
     );
 
-    setDoc(
-      docRef,
-      {
-        id: updatedDessert.id,
-        label: updatedDessert.label,
-        recipe: updatedDessert.recipe,
-        price: `${updatedDessert.price}`,
-        imageUri: updatedDessert.imageUri,
-        category: updatedDessert.category,
-      },
-      { merge: true }
-    );
     return from(
       updateDoc(docRef, {
         label: updatedDessert.label,
@@ -114,13 +103,53 @@ export class FirestoreService implements OnInit {
     );
   }
 
-  getAll(): Observable<Dessert[]> {
+  archiveRequest(requestToArchive: ContactRequest): Observable<void> {
+    let docRef = doc(
+      this.firestore,
+      this.CONTACT_COLLECTION,
+      requestToArchive.id!
+    );
+
+    return from(
+      updateDoc(docRef, {
+        isHandled: true
+      })
+    ).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
+
+  getAllDessert(): Observable<Dessert[]> {
     return from(
       getDocs(collection(this.firestore, this.DESSERT_COLLECTION))
     ).pipe(
       map((querySnapshot) => {
         return querySnapshot.docs.map((doc) => {
-          let data = doc.data() as Dessert;
+          return doc.data() as Dessert;
+        });
+      }),
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
+
+  getAllContact(): Observable<ContactRequest[]> {
+    const collectionRef = collection(this.firestore, this.CONTACT_COLLECTION);
+
+    const queryRef = query(
+      collectionRef,
+      orderBy('id'),
+      where('isHandled', '==', false)
+    );
+    return from(
+      getDocs(queryRef)
+    ).pipe(
+      map((querySnapshot) => {
+        return querySnapshot.docs.map((doc) => {
+          let data = doc.data() as ContactRequest;
           return data;
         });
       }),
@@ -132,7 +161,6 @@ export class FirestoreService implements OnInit {
 
   deleteDessert(dessert: Dessert): Observable<any> {
     const docRef = doc(this.firestore, this.DESSERT_COLLECTION, dessert.id);
-    console.log(this.fireAuth.config.apiKey)
     return from(deleteDoc(docRef)).pipe(
       catchError((error) => {
         throw error;
@@ -194,7 +222,6 @@ export class FirestoreService implements OnInit {
     pageSize: number = 10,
     filter: string[]
   ): Observable<Dessert[] | undefined> {
-    console.log(filter)
     const collectionRef = collection(this.firestore, this.DESSERT_COLLECTION);
     const queryRef = query(
       collectionRef,

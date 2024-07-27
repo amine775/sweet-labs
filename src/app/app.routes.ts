@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { EventsComponent } from './events/events.component';
 import { ContactComponent } from './contact/contact.component';
-import { FavoritesComponent } from './favorites/favorites.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
     {
@@ -32,8 +32,8 @@ export const routes: Routes = [
         component: ContactComponent
     },
     {
-        path: 'favorites', 
-        component: FavoritesComponent
+        path: 'cart', 
+        component: CartComponent
     },
     {
         path: '**',

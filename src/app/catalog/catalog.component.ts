@@ -68,16 +68,16 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   
 
-  addToFavorite(favoriteDessert: Dessert) {
-    this.productService.addToFavorites(favoriteDessert);
+  addToCart(cartDessert: Dessert) {
+    this.productService.addToCart(cartDessert);
   }
 
-  removeFromFavorite(dessert: Dessert) {
-    this.productService.removeFromFavorites(dessert);
+  removeFromCart(dessert: Dessert) {
+    this.productService.removeFromCarts(dessert);
   }
 
-  isFavorite(dessert: Dessert): boolean {
-    return this.productService.isFavorite(dessert.id);
+  isInCart(dessert: Dessert): boolean {
+    return this.productService.isInCart(dessert.id);
   }
 
   nextPage() {

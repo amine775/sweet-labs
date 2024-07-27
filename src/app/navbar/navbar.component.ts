@@ -19,14 +19,16 @@ export class NavbarComponent {
 
   isDisplayMenu = false;
 
-  toggleDisplayMenu() {
+  toggleDisplayMenu(toggle: boolean | undefined = undefined) {
+    if (toggle !== undefined) {
+      this.isDisplayMenu = toggle
+      return;
+    }
     this.isDisplayMenu = !this.isDisplayMenu;
   }
 
   logout() {
-    console.log(this.authService.isAuthenticated$)
     this.authService.logout();
-    console.log(this.authService.isAuthenticated$)
   }
 
 }

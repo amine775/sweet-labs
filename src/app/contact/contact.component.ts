@@ -33,10 +33,12 @@ export class ContactComponent {
     details: new FormControl(""),
   });
   contact: ContactRequest = {
+    id: undefined,
     name: "",
     email: "",
     phoneNumber: "",
     details: "",
+    creationDate: new Date(),
     isHandled: false
   };
 

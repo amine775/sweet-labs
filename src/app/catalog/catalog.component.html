@@ -55,22 +55,16 @@
         <p style="height: 50px">Recette : {{ dessert.recipe }}</p>
         <ng-template pTemplate="footer">
           <div class="flex gap-3 mt-1">
-            @if(!isFavorite(dessert)) {
+            @if(!isInCart(dessert)) {
             <p-button
-              label="Ajouter à mes favoris"
+              label="Ajouter au panier"
               class="w-full"
               styleClass="w-full"
               severity="success"
-              (click)="addToFavorite(dessert)"
+              (click)="addToCart(dessert)"
             />
             } @else {
-            <p-button
-              label="Supprimer de mes favoris"
-              class="w-full"
-              styleClass="w-full"
-              severity="danger"
-              (click)="removeFromFavorite(dessert)"
-            />
+              TODO
             }
           </div>
         </ng-template>
