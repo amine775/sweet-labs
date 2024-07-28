@@ -18,7 +18,7 @@
             <h1 routerLink="home">Sweet Lab's</h1>
         </div>
        
-        <div class="menu-utilities">
+        <div class="menu-utilities" (click)="toggleDisplayMenu(false)">
             <div>
             @if(authService.isAuthenticated$ | async;) {
                 <div>

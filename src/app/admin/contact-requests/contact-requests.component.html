@@ -1,34 +1,39 @@
-<p-table [value]="contactRequests" [tableStyle]="{ 'min-width': '50rem' }">
-  <ng-template pTemplate="header" let-columns>
-    <tr>
-      <th>Archiver</th>
-      <th>Nom</th>
-      <th>Email</th>
-      <th>Numéro de téléphone</th>
-      <th>Créer le</th>
-      <th class="details-header">Détails</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-request>
-    <tr>
-      <td>
-        <div class="card flex justify-content-center gap-2">
-          <p-toast />
-          <p-confirmPopup />
-          <i
-            class="pi pi-ban archive danger"
-            (click)="confirmArchive($event, request)"
-          ></i>
-         
-        </div>
-      </td>
-      <td>{{ request.name }}</td>
-      <td>{{ request.email }}</td>
-      <td>{{ request.phoneNumber }}</td>
-      <td>
-        {{ request.creationDate | timestampToDate | date : "dd/MM/yyyy hh:MM" }}
-      </td>
-      <td class="details-body">{{ request.details }}</td>
-    </tr>
-  </ng-template>
-</p-table>
+@if(contactRequests.length > 0) {
+
+  <p-table [value]="contactRequests" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Archiver</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Numéro de téléphone</th>
+        <th>Créer le</th>
+        <th class="details-header">Détails</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-request>
+      <tr>
+        <td>
+          <div class="card flex justify-content-center gap-2">
+            <p-toast />
+            <p-confirmPopup />
+            <i
+              class="pi pi-ban archive danger"
+              (click)="confirmArchive($event, request)"
+            ></i>
+          </div>
+        </td>
+        <td>{{ request.name }}</td>
+        <td>{{ request.email }}</td>
+        <td>{{ request.phoneNumber }}</td>
+        <td>
+          {{ request.creationDate | timestampToDate | date : "dd/MM/yyyy hh:MM" }}
+        </td>
+        <td class="details-body">{{ request.details }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+} @else {
+  <p>Aucune demande de contact</p>
+}
+

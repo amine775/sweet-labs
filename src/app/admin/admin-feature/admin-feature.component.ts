@@ -281,6 +281,12 @@ export class AdminFeatureComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.firestore.updateDessert(this.dessert).subscribe({
         next: () => {
+          this.desserts = this.desserts.map(dessert => {
+            if (dessert.id === this.dessert.id) {
+              return this.dessert
+            }
+            return dessert
+          })
           resolve();
         },
         error: (error) => {
@@ -299,6 +305,7 @@ export class AdminFeatureComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.firestore.saveDessert(this.dessert).subscribe({
         next: (success) => {
+          this.desserts.push(this.dessert)
           this.onDessertCreatedOrUpdated();
           resolve();
         },

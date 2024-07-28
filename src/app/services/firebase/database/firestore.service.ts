@@ -192,6 +192,7 @@ export class FirestoreService implements OnInit {
       map((querySnapshot) => {
         return querySnapshot.docs.map((doc) => {
           let data = doc.data() as QuoteRequest;
+          console.log(data)
           return data;
         });
       }),

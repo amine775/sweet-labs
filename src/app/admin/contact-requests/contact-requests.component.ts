@@ -73,7 +73,10 @@ export class ContactRequestsComponent implements OnDestroy {
 
   archive(request: ContactRequest) {
     this.firebaseService.archiveRequest(request, 'contact').pipe(
-      tap(() => this.onSuccess()),
+      tap(() => {
+        this.contactRequests.filter(requestInArray => requestInArray.id !== request.id)
+        this.onSuccess()
+      }),
       catchError((error) => {
         this.onError();
         return error;

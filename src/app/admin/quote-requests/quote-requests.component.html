@@ -1,7 +1,8 @@
 <div class="container">
+  @if (quoteRequests$ | async; as quotes) { @if (quotes.length > 0) {
   <div class="card">
     <p-table
-      [value]="(quoteRequests$ | async)!"
+      [value]="quotes"
       [tableStyle]="{ 'min-width': '20rem' }"
       lazy="true"
     >
@@ -83,9 +84,18 @@
             </li>
           </ul>
           <div class="action">
-            <p-button label="Archiver" severity="help" (click)="archive(quote)"/></div>
+            <p-button
+              label="Archiver"
+              severity="info"
+              (click)="archive(quote)"
+            />
+          </div>
         </p-dialog>
       </ng-template>
     </p-table>
   </div>
+  } @else {
+  <p>Aucune demande de devis</p>
+  } }
+  <p-toast />
 </div>
