@@ -28,6 +28,7 @@ import {
 import { Dessert } from '../../../domains/dessert';
 import { getDoc, limitToLast, where } from 'firebase/firestore';
 import { ContactRequest } from '../../../domains/contact-request';
+import { QuoteRequest } from '../../../domains/quote-request';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,7 @@ export class FirestoreService implements OnInit {
   firestore = inject(Firestore);
   DESSERT_COLLECTION = 'dessert';
   CONTACT_COLLECTION = 'contact';
+  QUOTE_COLLECTION = 'quote';
 
   saveDessert(addDessertRequest: AddDessertRequest): Observable<void> {
     let id = uuid.v4();
@@ -53,7 +55,7 @@ export class FirestoreService implements OnInit {
         recipe: addDessertRequest.recipe,
         price: addDessertRequest.price,
         imageUri: addDessertRequest.imageUri,
-        category: addDessertRequest.category
+        category: addDessertRequest.category,
       })
     ).pipe(
       catchError((err) => {
@@ -63,7 +65,7 @@ export class FirestoreService implements OnInit {
   }
 
   saveContactRequest(addContactRequest: ContactRequest): Observable<void> {
-    let id = uuid.v4()
+    let id = uuid.v4();
     return from(
       setDoc(doc(this.firestore, this.CONTACT_COLLECTION, id), {
         id: id,
@@ -72,9 +74,31 @@ export class FirestoreService implements OnInit {
         phoneNumber: addContactRequest.phoneNumber,
         details: addContactRequest.details,
         creationDate: new Date(),
-        isHandled: addContactRequest.isHandled
+        isHandled: addContactRequest.isHandled,
       })
     ).pipe(
+      catchError((err) => {
+        throw err;
+      })
+    );
+  }
+
+  saveQuoteRequest(quoteRequest: QuoteRequest): Observable<void> {
+    let id = uuid.v4();
+    return from(
+      setDoc(doc(this.firestore, this.QUOTE_COLLECTION, id), {
+        id: id,
+        email: quoteRequest.email,
+        phoneNumber: quoteRequest.phoneNumber,
+        products: quoteRequest.products,
+        details: quoteRequest.details,
+        creationDate: new Date(),
+        isHandled: quoteRequest.isHandled,
+      })
+    ).pipe(
+      tap(() => {
+        console.log('test');
+      }),
       catchError((err) => {
         throw err;
       })
@@ -103,16 +127,15 @@ export class FirestoreService implements OnInit {
     );
   }
 
-  archiveRequest(requestToArchive: ContactRequest): Observable<void> {
-    let docRef = doc(
-      this.firestore,
-      this.CONTACT_COLLECTION,
-      requestToArchive.id!
-    );
+  archiveRequest(
+    requestToArchive: ContactRequest,
+    targetCollection: string
+  ): Observable<void> {
+    let docRef = doc(this.firestore, targetCollection, requestToArchive.id!);
 
     return from(
       updateDoc(docRef, {
-        isHandled: true
+        isHandled: true,
       })
     ).pipe(
       catchError((error) => {
@@ -136,7 +159,7 @@ export class FirestoreService implements OnInit {
     );
   }
 
-  getAllContact(): Observable<ContactRequest[]> {
+  getAllContactRequest(): Observable<ContactRequest[]> {
     const collectionRef = collection(this.firestore, this.CONTACT_COLLECTION);
 
     const queryRef = query(
@@ -144,12 +167,31 @@ export class FirestoreService implements OnInit {
       orderBy('id'),
       where('isHandled', '==', false)
     );
-    return from(
-      getDocs(queryRef)
-    ).pipe(
+    return from(getDocs(queryRef)).pipe(
       map((querySnapshot) => {
         return querySnapshot.docs.map((doc) => {
           let data = doc.data() as ContactRequest;
+          return data;
+        });
+      }),
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
+
+  getAllQuoteRequest(): Observable<QuoteRequest[]> {
+    const collectionRef = collection(this.firestore, this.QUOTE_COLLECTION);
+
+    const queryRef = query(
+      collectionRef,
+      orderBy('id'),
+      where('isHandled', '==', false)
+    );
+    return from(getDocs(queryRef)).pipe(
+      map((querySnapshot) => {
+        return querySnapshot.docs.map((doc) => {
+          let data = doc.data() as QuoteRequest;
           return data;
         });
       }),
@@ -168,9 +210,12 @@ export class FirestoreService implements OnInit {
     );
   }
 
-  async countDesserts(filter:string[]): Promise<number> {
-    const dessertsCollection = collection(this.firestore, this.DESSERT_COLLECTION);
-    const q = query(dessertsCollection, where('category', 'in', filter))
+  async countDesserts(filter: string[]): Promise<number> {
+    const dessertsCollection = collection(
+      this.firestore,
+      this.DESSERT_COLLECTION
+    );
+    const q = query(dessertsCollection, where('category', 'in', filter));
     const dessertsSnapshots = await getCountFromServer(q);
     return dessertsSnapshots.data().count;
   }

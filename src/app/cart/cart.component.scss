@@ -77,6 +77,12 @@
       }
     }
   }
+
+  > .empty-cart {
+    margin: 50px;
+    text-align: start;
+    width: 90vw;
+  }
 }
 
 input[type="number"]::-webkit-inner-spin-button,

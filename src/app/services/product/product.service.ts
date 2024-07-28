@@ -36,11 +36,11 @@ export class ProductService implements OnInit {
     newCartDessertWithQuantity.quantity = 1;
     currentCarts.push(newCartDessertWithQuantity);
     this.subjectCarts.next([...currentCarts]);
-    localStorage.setItem("carts", JSON.stringify(this.subjectCarts.value));
+    localStorage.setItem('carts', JSON.stringify(this.subjectCarts.value));
   }
 
   removeFromCarts(dessertToRemove: any) {
-    let localCarts = localStorage.getItem("carts");
+    let localCarts = localStorage.getItem('carts');
     if (localCarts) {
       let currentLocalCarts = JSON.parse(localCarts) as LocalProduct[];
       let newcarts = currentLocalCarts.filter(
@@ -49,6 +49,11 @@ export class ProductService implements OnInit {
       this.subjectCarts.next([...newcarts]);
       localStorage.setItem("carts", JSON.stringify(this.subjectCarts.value));
     }
+  }
+
+  emptyCart() {
+    localStorage.removeItem('carts')
+    this.subjectCarts.next([])
   }
 
   updateCart(newCart: LocalProduct[]) {

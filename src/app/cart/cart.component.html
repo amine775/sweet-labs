@@ -1,125 +1,112 @@
 <div class="container">
+
+  <p-toast />
   <div class="products-header">
     <div class="products-details">
       <h2>Mon panier</h2>
       <p class="details-quote">Demander un devis</p>
     </div>
-    <button pButton pRipple label="Devis" class="p-button-success"></button>
+    <button
+      pButton
+      pRipple
+      label="Demander un devis"
+      icon="pi pi-send"
+      class="p-button"
+      [disabled]="productsCart.length < 1"
+      (click)="showQuoteModal(true)"
+    ></button>
   </div>
 
-  <ul class="products">
-    @for (product of productsCart; track product.id) {
-    <li class="product-item">
-      <div class="product-image">
-        <img [src]="product.imageUri" [alt]="product.category" width="50" />
-      </div>
-      <div class="product-container">
-        <div class="product-details">
-          <strong>{{ product.label }}</strong>
-          <p class="product-category">{{ product.category }}</p>
+  @if(productsCart.length > 0) {
+    <ul class="products">
+      @for (product of productsCart; track product.id) {
+      <li class="product-item">
+        <div class="product-image">
+          <img [src]="product.imageUri" [alt]="product.category" width="50" />
         </div>
-        <div class="product-action">
-          <div class="product-quantity">
-            <span (click)="deduct(product.id)">
-              <i class="pi pi-minus"></i>
-            </span>
-            <input
-              type="number"
-              min="1"
-              max="200"
-              step="1"
-              [value]="product.quantity"
-            />
-            <span (click)="add(product.id)">
-              <i class="pi pi-plus"></i>
-            </span>
+        <div class="product-container">
+          <div class="product-details">
+            <strong>{{ product.label }}</strong>
+            <p class="product-category">{{ product.category }}</p>
           </div>
-          <div class="card flex justify-content-center gap-2">
-            <p-toast />
-            <p-confirmPopup />
-            <p-button
-              icon="pi pi-times"
-              [text]="true"
-              [raised]="false"
-              severity="danger"
-              (click)="removeProduct($event, product)"
-            ></p-button>
+          <div class="product-action">
+            <div class="product-quantity">
+              <span (click)="deduct(product.id)">
+                <i class="pi pi-minus"></i>
+              </span>
+              <input
+                type="number"
+                min="1"
+                max="200"
+                step="1"
+                [value]="product.quantity"
+              />
+              <span (click)="add(product.id)">
+                <i class="pi pi-plus"></i>
+              </span>
+            </div>
+            <div class="card flex justify-content-center gap-2">
+              <p-toast />
+              <p-confirmPopup />
+              <p-button
+                icon="pi pi-times"
+                [text]="true"
+                [raised]="false"
+                severity="danger"
+                (click)="removeProduct($event, product)"
+              ></p-button>
+            </div>
           </div>
         </div>
-      </div>
-    </li>
-    }
-  </ul>
-
-  <div class="quote-container">
-    <div
-    class="surface-card p-4 shadow-2 border-round w-full lg:w-6 contact-container animation-duration-1000 animation-ease-in-out"
-    pAnimateOnScroll
-    enterClass="fadeinleft"
-    leaveClass="fadeoutleft"
-    #quote
-  >
-    <div class="text-center mb-5">
-      <img src="/image/logo.png" alt="Image" height="50" class="mb-3" />
-      <div class="text-900 text-3xl font-medium mb-3">Laissez nous votre message !</div>
-      <span class="text-600 font-medium line-height-3"
-        >Nous vous recontacterons rapidement</span
-      >
+      </li>
+      }
+    </ul>
+  } @else {
+    <div class="empty-cart">
+      <p><strong>Panier vide</strong></p>
     </div>
+  }
+  
 
-    <form [formGroup]="quoteForm" (ngSubmit)="submit()">
-      <label for="name" class="block text-900 font-medium mb-2">Nom</label>
-      <input
-        id="name"
-        type="text"
-        placeholder="Nom"
-        pInputText
-        class="w-full mb-3"
-        formControlName="name"
-      />
-
-      <label for="email1" class="block text-900 font-medium mb-2">Email</label>
-      <input
-        id="email1"
-        type="text"
-        placeholder="Adresse email"
-        pInputText
-        class="w-full mb-3"
-        formControlName="email"
-      />
-
-      <label for="phoneNumber" class="block text-900 font-medium mb-2"
-        >Numéro de téléphone</label
-      >
-      <input
-        id="phoneNumber"
-        type="text"
-        placeholder="Numéro de téléphone"
-        pInputText
-        class="w-full mb-3"
-        formControlName="phoneNumber"
-      />
-
-      <label for="details" class="block text-900 font-medium mb-2"
-        >Détails</label
-      >
-      <textarea
-        id="details"
-        rows="5"
-        cols="51"
-        pInputTextarea
-        formControlName="details"
-        class="w-full mb-3"
-      ></textarea>
-
-      <button
-        pButton
-        pRipple
-        label="Envoyer"
-        icon="pi pi-send"
-        class="w-full"
-      ></button>
+  <p-dialog
+    header="Demande de devis"
+    [modal]="true"
+    [(visible)]="quoteDetailsVisible"
+    [style]="{ width: '25rem' }"
+  >
+    <span class="p-text-secondary block mb-5">Mes informations de contact</span>
+    <form [formGroup]="quoteForm">
+      <div class="flex align-items-center gap-3 mb-3">
+        <label for="phoneNumber" class="font-semibold w-6rem"
+          >Téléphone portable</label
+        ><input
+          id="phoneNumber"
+          type="text"
+          placeholder="Numéro de téléphone"
+          pInputText
+          class="w-full mb-3"
+          formControlName="phoneNumber"
+        />
+      </div>
+      <div class="flex align-items-center gap-3 mb-5">
+        <label for="email" class="font-semibold w-6rem">Email</label
+        ><input
+          id="email"
+          type="text"
+          placeholder="Adresse email"
+          pInputText
+          class="w-full mb-3"
+          formControlName="email"
+        />
+      </div>
+      <div class="flex justify-content-end gap-2">
+        <p-button
+          label="Annuler"
+          severity="secondary"
+          (onClick)="showQuoteModal(false)"
+        />
+        <p-button label="Envoyer" (onClick)="submit()" />
+      </div>
     </form>
-  </div>
-  </div>
+  </p-dialog>
 </div>

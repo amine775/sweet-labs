@@ -30,7 +30,7 @@ import { ButtonModule } from "primeng/button";
 export class UsersRequestsComponent implements OnDestroy {
   firebaseService = inject(FirestoreService);
 
-  requests$ = this.firebaseService.getAllContact();
+  requests$ = this.firebaseService.getAllContactRequest();
 
   messageService = inject(MessageService);
   confirmationService = inject(ConfirmationService);
@@ -72,7 +72,7 @@ export class UsersRequestsComponent implements OnDestroy {
   }
 
   archive(request: ContactRequest) {
-    this.firebaseService.archiveRequest(request).pipe(
+    this.firebaseService.archiveRequest(request, 'contact').pipe(
       tap(() => this.onSuccess()),
       catchError((error) => {
         this.onError();
