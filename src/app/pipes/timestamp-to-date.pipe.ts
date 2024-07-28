@@ -7,7 +7,9 @@ import { Timestamp } from 'firebase/firestore';
 })
 export class TimestampToDatePipe implements PipeTransform {
 
-  transform(value: Date | Timestamp, ...args: unknown[]): number {
+  transform(value: Date | Timestamp | undefined, ...args: unknown[]): number {
+    if (value ===undefined || value === null)
+      return 0
     let timestamp = value as Timestamp
     return timestamp.seconds * 1000
   }

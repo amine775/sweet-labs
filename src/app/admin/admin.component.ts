@@ -21,8 +21,12 @@ export class AdminComponent {
       this.router.navigate(['admin/admin-features'])
       return;
     }
-    if(featureId === 'users-requests') {
-      this.router.navigate(['admin/users-requests'])
+    if(featureId === 'contact-requests') {
+      this.router.navigate(['admin/contact-requests'])
+      return;
+    }
+    if(featureId === 'quote-requests') {
+      this.router.navigate(['admin/quote-requests'])
       return;
     }
   }

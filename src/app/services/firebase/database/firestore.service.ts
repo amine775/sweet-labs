@@ -128,7 +128,7 @@ export class FirestoreService implements OnInit {
   }
 
   archiveRequest(
-    requestToArchive: ContactRequest,
+    requestToArchive: ContactRequest | QuoteRequest,
     targetCollection: string
   ): Observable<void> {
     let docRef = doc(this.firestore, targetCollection, requestToArchive.id!);

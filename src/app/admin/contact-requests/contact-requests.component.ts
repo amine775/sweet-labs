@@ -23,11 +23,11 @@ import { ButtonModule } from "primeng/button";
     ToastModule,
     ButtonModule
   ],
-  templateUrl: "./users-requests.component.html",
-  styleUrl: "./users-requests.component.scss",
+  templateUrl: "./contact-requests.component.html",
+  styleUrl: "./contact-requests.component.scss",
   providers: [MessageService, ConfirmationService],
 })
-export class UsersRequestsComponent implements OnDestroy {
+export class ContactRequestsComponent implements OnDestroy {
   firebaseService = inject(FirestoreService);
 
   requests$ = this.firebaseService.getAllContactRequest();

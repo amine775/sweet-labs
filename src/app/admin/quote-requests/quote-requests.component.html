@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="card">
+    <p-table
+      [value]="(quoteRequests$ | async)!"
+      [tableStyle]="{ 'min-width': '20rem' }"
+      lazy="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Email</th>
+          <th>Date de création</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-quote>
+        <tr (click)="showDialog(quote, true)" class="quote-item">
+          <td>{{ quote.email }}</td>
+          <td>
+            {{ quote.creationDate.seconds * 1000 | date : "dd/MM/yyyy HH:mm" }}
+          </td>
+        </tr>
+        <p-dialog
+          header="Demande de devis"
+          [modal]="true"
+          [(visible)]="dialogVisible"
+          [style]="{ width: '50rem' }"
+          [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+          [maximizable]="false"
+        >
+          <ul>
+            <li>
+              <strong>Email : </strong> <span> {{ quoteToShow?.email }} </span>
+            </li>
+            <li>
+              <strong>Numéro de téléphone : </strong>
+              <span> {{ quoteToShow?.phoneNumber }} </span>
+            </li>
+            <li>
+              <strong>Date de création : </strong>
+              <span>
+                {{
+                  quoteToShow?.creationDate
+                    | timestampToDate
+                    | date : "dd/MM/yyyy hh:MM"
+                }}
+              </span>
+            </li>
+            <li>
+              <strong>Détails : </strong>
+              <span> {{ quoteToShow?.details }} </span>
+            </li>
+            <li>
+              <span><strong>Produits :</strong> </span>
+              @if (quoteToShow !== undefined) {
+              <p-table
+                [value]="quoteToShow!.products"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                lazy="true"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>#</th>
+                    <th>Quantité</th>
+                    <th>Libellé</th>
+                    <th>Catégorie</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                  <tr>
+                    <td>
+                      <img
+                        [src]="product.imageUri"
+                        [alt]="product.category"
+                        width="40"
+                      />
+                    </td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.label }}</td>
+                    <td>{{ product.category }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              }
+            </li>
+          </ul>
+          <div class="action">
+            <p-button label="Archiver" severity="help" (click)="archive(quote)"/></div>
+        </p-dialog>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

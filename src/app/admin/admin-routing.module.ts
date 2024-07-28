@@ -2,7 +2,8 @@ import { Route, RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { AdminComponent } from "./admin.component";
 import { AdminFeatureComponent } from "./admin-feature/admin-feature.component";
-import { UsersRequestsComponent } from "./users-requests/users-requests.component";
+import { ContactRequestsComponent } from "./contact-requests/contact-requests.component";
+import { QuoteRequestsComponent } from "./quote-requests/quote-requests.component";
 
 export const routes: Route[] = [
     {
@@ -19,8 +20,12 @@ export const routes: Route[] = [
             component: AdminFeatureComponent
           }, 
           {
-            path: 'users-requests', 
-            component: UsersRequestsComponent
+            path: 'contact-requests', 
+            component: ContactRequestsComponent
+          },
+          {
+            path: 'quote-requests', 
+            component: QuoteRequestsComponent
           }
         ]
       }
