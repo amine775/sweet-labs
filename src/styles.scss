@@ -5,10 +5,17 @@
 
 
 /* Variables */
-$font-family-primary: 'Arial, sans-serif';
+$font-family-primary: 'montaga, sans-serif';
 $default-font-size: 16px;
 $text-color: rgb(71, 70, 70);
 $main-color: #eee5dd;
+
+
+@font-face {
+  font-family: montaga;
+  src: url('/public/fonts/Montaga-Regular.ttf')
+      ;
+}
 
 /* Global styles */
 body {
@@ -24,11 +31,6 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-weight: normal;
-}
-
-h1 {
-  font-size: 2em; // 32px par défaut
 }
 
 h2 {

@@ -1,73 +1,71 @@
 <header>
+  <nav>
 
-    <nav>
-        <div class="menu-burger" >
-            <button id="burger-button" (click)="toggleDisplayMenu()"  [style.font-size]="isDisplayMenu ? '32px' : '16px'">
-                @if(!isDisplayMenu) {
-                    <i class="fa-solid fa-bars"></i>
-                    <span>Menu</span>
-                } @else {
-                    <i class="fa-regular fa-circle-xmark"></i>
-                }
-                
-            </button>
-        </div>
-
-
-        <div class="title"  (click)="toggleDisplayMenu(false)">
-            <h1 routerLink="home">Sweet Lab's</h1>
-        </div>
-       
-        <div class="menu-utilities" (click)="toggleDisplayMenu(false)">
-            <div>
-            @if(authService.isAuthenticated$ | async;) {
-                <div>
-                    <a routerLink="admin">Admin</a>
-                </div>
-            } @else {
-                <div id="utility-contact">
-                    <a routerLink="contact">Contactez-nous</a>
-                </div>
-            }
-
-
-                <div class="menu-icons"  (click)="toggleDisplayMenu(false)">
-                    <a routerLink="cart">
-                        <div class="cart-icons">
-                            @if(productService.cartsCount$ | async; as cartsCount) {
-                                <p-badge [value]="cartsCount"></p-badge>
-                            }
-                            
-                            <i class="pi pi-shopping-cart" style="font-size: 20px"></i>
-                        </div>
-                    </a>   
-                    @if(authService.isAuthenticated$ | async;) {
-                        <a routerLink="/home" (click)="logout()" class="exit">
-                            <i class="pi pi-sign-out" style="font-size: 20px"></i>
-                        </a>
-                    } @else {
-                        <a routerLink="/login" >
-                            <i class="pi pi-user" style="font-size: 20px"></i>
-                        </a>
-                    }
-                    
-                </div>
-            </div>
-        </div>
-       
-    </nav>
-    <div class="menu" [ngClass]="{'menu-inactive' : !isDisplayMenu}">
-        <div class="placeholder" (click)="toggleDisplayMenu()"></div>
-       
-        <div class="deployed-menu">
-            <ul>
-                <li><a routerLink="" (click)="toggleDisplayMenu()">Accueil</a></li>
-                <li><a routerLink="catalogue" (click)="toggleDisplayMenu()">Notre catalogue</a></li>
-                <li><a routerLink="events" (click)="toggleDisplayMenu()">Vos évènements</a></li>
-                <li><a routerLink="contact" (click)="toggleDisplayMenu()">Contactez-nous</a></li>
-            </ul>
-            <div class="placeholder" (click)="toggleDisplayMenu()"></div>
-        </div>
-        
+    <div
+      id="nav-icon3"
+      [ngClass]="isDisplayMenu ? 'open' : ''"
+      (click)="toggleDisplayMenu()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
+
+    <div class="title" (click)="toggleDisplayMenu(false)">
+      <h1 routerLink="home">SWEET LAB'S</h1>
+    </div>
+
+    <div class="menu-utilities" (click)="toggleDisplayMenu(false)">
+      <div>
+        <div class="menu-icons" (click)="toggleDisplayMenu(false)">
+          <a routerLink="cart">
+            <div class="cart-icons">
+              @if(productService.cartsCount$ | async; as cartsCount) {
+              <p-badge [value]="cartsCount"></p-badge>
+              }
+
+              <i class="pi pi-shopping-cart" style="font-size: 20px"></i>
+            </div>
+          </a>
+          @if(authService.isAuthenticated$ | async;) {
+          <a routerLink="/home" (click)="logout()" class="exit">
+            <i class="pi pi-sign-out" style="font-size: 20px"></i>
+          </a>
+          } @else {
+          <a routerLink="/login">
+            <i class="pi pi-user" style="font-size: 20px"></i>
+          </a>
+          }
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="menu" [ngClass]="{ 'menu-inactive': !isDisplayMenu }">
+    <div class="placeholder" (click)="toggleDisplayMenu()"></div>
+
+    <div class="deployed-menu">
+      <ul>
+        <li><a routerLink="" (click)="toggleDisplayMenu()">Accueil</a></li>
+        <li>
+          <a routerLink="catalogue" (click)="toggleDisplayMenu()"
+            >Nos desserts</a
+          >
+        </li>
+        <li>
+          <a routerLink="events" (click)="toggleDisplayMenu()"
+            >Vos évènements</a
+          >
+        </li>
+        <li>
+          <a routerLink="contact" (click)="toggleDisplayMenu()"
+            >Contactez-nous</a
+          >
+        </li>
+        <li>
+          <a routerLink="admin" (click)="toggleDisplayMenu()">Administration</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </header>
