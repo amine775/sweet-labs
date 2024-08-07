@@ -1,0 +1,83 @@
+$title-color: #b79074;
+
+@font-face {
+  font-family: montaga;
+  src: url("/fonts/Montaga-Regular.ttf");
+}
+
+.container {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  margin-top: 100px;
+  padding: 0 20px;
+
+  * {
+    font-family: montaga;
+  }
+  > .aboutus-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > .title-container {
+      text-align: center;
+      margin-bottom: 25px;
+      > h4 {
+        color: $title-color;
+        font-size: clamp(17px, 3vw, 40px);
+        font-weight: 400;
+        text-decoration: underline;
+      }
+    }
+    > .content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > .first-description {
+        width: 100%;
+        > p {
+            width: 75%;
+            text-align: start;
+            font-size: clamp(16px, 3vw, 45px);
+            letter-spacing: -0.41px;
+            > span {
+                color: $title-color;
+                font-size: clamp(20px, 3.3vw, 55px);
+            }
+          }
+      }
+      
+      > .img-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        > img {
+          width: clamp(160px, 20vw, 270px);
+          height: clamp(160px, 20vw, 270px);
+          border-radius: 16px;
+        }
+      }
+      > .second-description {
+        width: 90%;
+        display: flex;
+        margin-top: 60px;
+        position: relative;
+        font-size: clamp(16px, 3vw, 45px);
+        text-align: center;
+        > .quote {
+            color: $title-color;
+            font-size: clamp(30px, 5vw, 90px);
+        }
+        > .quote:first-child {
+            position: absolute;
+            top: clamp(-40px, -4vw, -25px);
+        }
+        > .quote:last-child {
+            position: absolute;
+            bottom: -20px;
+            right: 0;
+        }
+      }
+    }
+  }
+}

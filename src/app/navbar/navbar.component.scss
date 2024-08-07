@@ -20,8 +20,8 @@ $menu-item-height: 65px;
 }
 
 #nav-icon3 {
-  width: 27px;
-  height: 50%;
+  width: 23px;
+  height: 35%;
   position: relative;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -35,7 +35,7 @@ $menu-item-height: 65px;
 }
 
 #nav-icon3 span {
-  box-shadow: 0px 0.5px 0px 1px black;
+  box-shadow: 0px 0.2px 0px 0.7px black;
   display: block;
   position: absolute;
   height: 2.5px;
@@ -59,15 +59,15 @@ $menu-item-height: 65px;
 }
 
 #nav-icon3 span:nth-child(2),#nav-icon3 span:nth-child(3) {
-  top: 9px;
+  top: 7px;
 }
 
 #nav-icon3 span:nth-child(4) {
-  top: 18px;
+  top: 14px;
 }
 
 #nav-icon3.open span:nth-child(1) {
-  top: 9px;
+  top: 7px;
   width: 0%;
   height: 0px;
   display: none;
@@ -89,7 +89,7 @@ $menu-item-height: 65px;
 }
 
 #nav-icon3.open span:nth-child(4) {
-  top: 9px;
+  top: 7px;
   width: 0%;
   height: 0px;
   display: none;

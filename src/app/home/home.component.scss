@@ -3,30 +3,11 @@
     align-items: flex-start;
     justify-content: center;
     height:500px;
-    > .description-container {
-        width: 350px;
-        > .quote {
-            font-size: 60px;
-            font-family: cursive;
-        }
-        > .quote:last-child {
-            text-align: end;
-        }
-        > .description {
-            text-align: center;
-        }
-    }
 }
 
 @media only screen and (min-width: 600px) {
     .container {
         height: 700px;
         align-items: center;
-        > .description-container {
-            width: 600px;
-            p {
-                font-size: 28px;
-            }
-        }
     }
 }
