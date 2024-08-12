@@ -9,10 +9,12 @@ $title-color: #b79074;
   margin-top: 60px;
   width: 100vw;
   background-color: #d9d9d973;
-  font-family: "montaga";
   display: flex;
   justify-content: center;
   align-items: center;
+  * {
+    font-family: montaga;
+  }
   > h3 {
     text-decoration: underline;
     > span {
