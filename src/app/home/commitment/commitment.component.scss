@@ -1,0 +1,105 @@
+$title-color: #b79074;
+
+@font-face {
+  font-family: montaga;
+  src: url("/fonts/Montaga-Regular.ttf");
+}
+
+.container {
+  margin-top: 60px;
+  width: 100vw;
+  background-color: #d9d9d973;
+  font-family: "montaga";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > h3 {
+    text-decoration: underline;
+    > span {
+      color: $title-color;
+    }
+  }
+
+  > .commitments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 30px 0;
+    > h3 {
+      text-decoration: underline;
+      text-align: center;
+      > span {
+        color: $title-color;
+      }
+    }
+
+    > .commitments-line {
+      display: flex;
+      > .commitment {
+        margin: 10px 10px 0 0;
+        width: clamp(160px, 20vw, 300px);
+        height: clamp(160px, 20vw, 300px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: clamp(8px, 1vw, 14px);
+        color: black;
+
+        > .commitment-header {
+          margin-top: 10px;
+          height: 50%;
+          > .img {
+            border-radius: 50%;
+            width: clamp(70px, 10vw, 150px);
+            height: clamp(70px, 10vw, 150px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            > img {
+              width: clamp(50px, 8vw, 100px);
+              height: clamp(50px, 8vw, 100px);
+            }
+          }
+        }
+        > .commitment-content {
+          height: 50%;
+          display: flex;
+          align-items: center;
+          width: 90%;
+          > p {
+            text-align: center;
+          }
+        }
+      }
+      > .commitment:first-child {
+        background-color: #cabbb0ac;
+        .img {
+          background-color: #b88a6988;
+        }
+      }
+      > .commitment:last-child {
+        background-color: #c7ab98;
+        .img {
+          background-color: #d9d9d9;
+        }
+      }
+    }
+    > .commitments-line:last-child {
+      > .commitment:first-child {
+        background-color: #caa2856e;
+        .img {
+          background-color: #ddc5c5;
+        }
+      }
+      > .commitment:last-child {
+        background-color: #c4ac9bac;
+        .img {
+          background-color: #f7f0e7;
+        }
+      }
+    }
+  }
+}

@@ -3,11 +3,12 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { BestSellerComponent } from './best-seller/best-seller.component';
 import { AboutusComponent } from "./aboutus/aboutus.component";
+import { CommitmentComponent } from './commitment/commitment.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselComponent, CategoriesComponent, BestSellerComponent, AboutusComponent],
+  imports: [CarouselComponent, CategoriesComponent, BestSellerComponent, AboutusComponent, CommitmentComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
