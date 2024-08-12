@@ -9,7 +9,7 @@ $title-color: #b79074;
   display: flex;
   width: 100vw;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 40px;
   padding: 0 20px;
 
   * {
@@ -56,7 +56,31 @@ $title-color: #b79074;
           height: clamp(160px, 20vw, 270px);
           border-radius: 16px;
         }
+        > .book-action {
+          display: flex;
+          align-items: center;
+          margin-left: 40px;
+          > button {
+            background-color: #cda384;
+            border: 1px solid black;
+            height: 40px;
+            width: 120px;
+            border-radius: 8px;
+            color: black;
+          }
+        }
+        
       }
+
+      > .img-container:last-child {
+        justify-content: flex-start !important;
+        > img {
+          width: clamp(190px, 45vw, 50vw);
+          height: clamp(190px, 45vw, 50vw);
+          border-radius: 16px;
+        }
+      }
+      
       > .second-description {
         width: 90%;
         display: flex;
@@ -70,13 +94,27 @@ $title-color: #b79074;
         }
         > .quote:first-child {
             position: absolute;
-            top: clamp(-40px, -4vw, -25px);
+            top: clamp(-55px, -4vw, -30px);
         }
         > .quote:last-child {
             position: absolute;
             bottom: -20px;
             right: 0;
         }
+      }
+
+      > .third-description {
+        margin-top: 60px;
+        width: 100%;
+        > p {
+            text-align: start;
+            font-size: clamp(16px, 3vw, 45px);
+            letter-spacing: -0.41px;
+            > span {
+                color: $title-color;
+                font-size: clamp(20px, 3.3vw, 55px);
+            }
+          }
       }
     }
   }
