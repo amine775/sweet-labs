@@ -91,7 +91,7 @@ export class AdminFeatureComponent implements OnInit {
   newFile: File | null = null;
 
   ngOnInit(): void {
-    this.firestore.getAllDessert().subscribe((desserts) => {
+    this.firestore.fetchAllDessert().subscribe((desserts) => {
       this.desserts = desserts;
     });
   }

@@ -1,0 +1,89 @@
+$title-color: rgba(168, 143, 115, 0.34);
+$font-color: rgba(183, 144, 116, 1);
+$button-color: rgba(217, 217, 217, 1);
+
+@font-face {
+  font-family: montaga;
+  src: url("/fonts/Montaga-Regular.ttf");
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  * {
+    font-family: montaga;
+  }
+  .title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    width: 310px;
+    height: 67px;
+    background-color: $title-color;
+    margin-bottom: 50px;
+  }
+
+  .list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    .category-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      margin-left: 20px;
+      .category-title {
+        text-align: center;
+        color: $font-color;
+        margin-bottom: 15px;
+        letter-spacing: -0.41px;
+        h4 {
+          font-weight: 100;
+          font-size: clamp(18px, 2vw, 28px);
+        }
+      }
+      .dessert-list {
+        display: flex;
+        justify-content: flex-start;
+        width: 100vw;
+        overflow: scroll;
+        .dessert-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin-right: clamp(10px, 3vw, 70px);
+          .dessert-label {
+            margin-bottom: 5px;
+            font-size: clamp(14px, 2vw, 24px);
+            color: black;
+          }
+          .dessert-img {
+            margin-bottom: clamp(5px, 2vw, 15px);
+            img {
+              width: clamp(70px, 15vw, 300px);
+              height: clamp(70px, 15vw, 300px);
+            }
+          }
+          .action {
+            width: 80%;
+            button {
+              width: 100%;
+              background-color: $button-color;
+              border: 0;
+              border-radius: 10px;
+              height: clamp(30px, 3vw, 50px);
+              font-size: clamp(14px, 2vw, 20px);
+            }
+          }
+        }
+      }
+    }
+  }
+}

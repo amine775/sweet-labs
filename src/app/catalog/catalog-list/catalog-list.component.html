@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="title-container">
+    <h3>Créer vôtre devis</h3>
+  </div>
+  <div class="list-container">
+    @for (category of categories; track $index) {
+    <div class="category-item">
+      <div class="category-title">
+        <h4>{{ category.title }} :</h4>
+      </div>
+      <div class="dessert-list">
+        @for (dessert of desserts; track dessert.id) { @if(dessert.category ===
+        category.label) {
+        <div class="dessert-container">
+          <div class="dessert-label">
+            <h5>
+              {{ dessert.label }}
+            </h5>
+          </div>
+          <div class="dessert-img">
+            <img [src]="dessert.imageUri" [alt]="dessert.category" />
+          </div>
+          <div class="action">
+            <button type="button" (click)="onAddDessert(dessert)">Ajouter</button>
+          </div>
+        </div>
+        } }
+      </div>
+    </div>
+    }
+  </div>
+</div>

@@ -144,14 +144,18 @@ export class FirestoreService implements OnInit {
     );
   }
 
-  getAllDessert(): Observable<Dessert[]> {
+  fetchAllDessert(): Observable<Dessert[]> {
     return from(
       getDocs(collection(this.firestore, this.DESSERT_COLLECTION))
     ).pipe(
+      tap(() => console.log('test')),
       map((querySnapshot) => {
         return querySnapshot.docs.map((doc) => {
           return doc.data() as Dessert;
         });
+      }),
+      tap((data) => {
+        console.log(data)
       }),
       catchError((error) => {
         throw error;
