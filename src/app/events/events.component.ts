@@ -9,10 +9,7 @@ import { InputTextareaModule } from "primeng/inputtextarea";
 import { FloatLabelModule } from "primeng/floatlabel";
 import { AnimateOnScrollModule } from "primeng/animateonscroll";
 import {
-  FormGroup,
   ReactiveFormsModule,
-  FormControl,
-  Validators,
 } from "@angular/forms";
 
 @Component({
@@ -60,7 +57,6 @@ export class EventsComponent implements OnInit {
     } else {
       this.currentImage.set(this.images.at(currentPosition + 1)!);
     }
-    console.log(this.currentImage());
   }
 
 

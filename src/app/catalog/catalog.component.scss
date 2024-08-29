@@ -1,115 +1,28 @@
+$title-color: rgba(168, 143, 115, 0.34);
+
+@font-face {
+  font-family: montaga;
+  src: url("/fonts/Montaga-Regular.ttf");
+}
+
 .container {
-  margin-top: 90px;
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
-  > .filter-container {
-    min-height: 60px;
+  * {
+    font-family: montaga;
+  }
+  .title-container {
     display: flex;
-    width: 100%;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-right: 20px;
-    > .checkbox-container {
-        display: flex;
-        justify-content: flex-end;
-        width: 100%;
-        > * {
-            margin: 5px;
-        }
-    }
-    >.filter-subcontainer {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        width: 100%;
-        p-button {
-            margin-left: 10px;
-        }
-    }
-    
-    .align-content-center {
-      align-content: center;
-      .p-element {
-        margin: 0 0 5px 10px;
-      }
-    }
-  }
-  .desserts-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: calc(100% - 0px);
-    .card-container {
-      margin: 20px;
-      img {
-        height: 304px;
-        min-height: 304px;
-        max-height: 304px;
-      }
-      .flex {
-        display: flex;
-        justify-content: center;
-      }
-    }
-
-    > .paginator {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
-        text-align: center;
-        height: 120px;
-        > p {
-            margin: 0 20px 0 0;
-            color: rgb(117, 117, 117);
-            font-size: 18px;
-        }
-        > button {
-            background-color: transparent;
-            border: 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            > i {
-                font-size: 11px;
-                color: #6b7280;
-            }
-        }
-        > button:disabled {
-            pointer-events: none;
-            > i {
-                color: #a6a8ad;
-            }
-        }
-        > button:hover {
-            background: #dfdfe1;
-            cursor: pointer;
-        }
-    }
-  }
-}
-
-.p-paginator-first, p.paginator-last {
-    display: none !important;
-}
-
-@media only screen and (min-width: 600px) {
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    > .desserts-container {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      > .p-element {
-        width: 100%;
-      }
-    }
+    border-radius: 5px;
+    width: 310px;
+    height: 67px;
+    background-color: $title-color;
+    margin-bottom: 50px;
   }
 }

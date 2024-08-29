@@ -1,3 +1,7 @@
 <div class="container">
+
+  <div class="title-container">
+    <h3>Créer vôtre devis</h3>
+  </div>
   <app-catalog-list [desserts]="(desserts$ | async) ?? []" (dessertToAdd)="addToCart($event)"></app-catalog-list>
 </div>
