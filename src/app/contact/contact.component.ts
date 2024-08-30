@@ -1,9 +1,5 @@
 import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { ButtonModule } from "primeng/button";
-import { FloatLabelModule } from "primeng/floatlabel";
-import { InputTextModule } from "primeng/inputtext";
-import { InputTextareaModule } from "primeng/inputtextarea";
 import { ContactRequest } from "../domains/contact-request";
 import { FirestoreService } from "../services/firebase/database/firestore.service";
 import { AlertService } from "../services/alert.service";
@@ -12,11 +8,7 @@ import { AlertService } from "../services/alert.service";
   selector: "app-contact",
   standalone: true,
   imports: [
-    InputTextModule,
-    InputTextareaModule,
-    FloatLabelModule,
     ReactiveFormsModule,
-    ButtonModule
   ],
   templateUrl: "./contact.component.html",
   styleUrl: "./contact.component.scss",

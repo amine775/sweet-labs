@@ -1,71 +1,30 @@
 <div class="container">
-  <div
-    class="surface-card p-4 shadow-2 border-round w-full lg:w-6 contact-container animation-duration-1000 animation-ease-in-out"
-    pAnimateOnScroll
-    enterClass="fadeinleft"
-    leaveClass="fadeoutleft"
-    #quote
-  >
-    <div class="text-center mb-5">
-      <img src="/image/logo.png" alt="Image" height="50" class="mb-3" />
-      <div class="text-900 text-3xl font-medium mb-3">Laissez nous votre message !</div>
-      <span class="text-600 font-medium line-height-3"
-        >Nous vous recontacterons rapidement</span
-      >
+  <div class="title-container">
+    <div class="title">
+      <h3>Laissez nous votre message</h3>
     </div>
-
-    <form [formGroup]="contactForm" (ngSubmit)="submit()">
-      <label for="name" class="block text-900 font-medium mb-2">Nom</label>
-      <input
-        id="name"
-        type="text"
-        placeholder="Nom"
-        pInputText
-        class="w-full mb-3"
-        formControlName="name"
-      />
-
-      <label for="email1" class="block text-900 font-medium mb-2">Email</label>
-      <input
-        id="email1"
-        type="text"
-        placeholder="Adresse email"
-        pInputText
-        class="w-full mb-3"
-        formControlName="email"
-      />
-
-      <label for="phoneNumber" class="block text-900 font-medium mb-2"
-        >Numéro de téléphone</label
-      >
-      <input
-        id="phoneNumber"
-        type="text"
-        placeholder="Numéro de téléphone"
-        pInputText
-        class="w-full mb-3"
-        formControlName="phoneNumber"
-      />
-
-      <label for="details" class="block text-900 font-medium mb-2"
-        >Détails</label
-      >
-      <textarea
-        id="details"
-        rows="5"
-        cols="51"
-        pInputTextarea
-        formControlName="details"
-        class="w-full mb-3"
-      ></textarea>
-
-      <button
-        pButton
-        pRipple
-        label="Envoyer"
-        icon="pi pi-send"
-        class="w-full"
-      ></button>
-    </form>
+    <p>Nous vous recontactons dans les plus bref délais</p>
   </div>
+
+  <form [formGroup]="contactForm" (ngSubmit)="submit()">
+    <div class="form-item">
+      <label for="name">Nom</label>
+      <input type="text" id="name" formControlName="name">
+    </div>
+    <div class="form-item">
+      <label for="email">Email</label>
+      <input type="text" id="email" formControlName="email">
+    </div>
+    <div class="form-item">
+      <label for="phone-number">Numéro de téléphone</label>
+      <input type="text" id="phone-number" formControlName="phoneNumber">
+    </div>
+    <div class="form-item">
+      <label for="details">Message</label>
+      <textarea type="textarea" id="details" formControlName="details" resize="none"></textarea>
+    </div>
+    <div class="action">
+      <button type="submit">Envoyer</button>
+    </div>
+  </form>
 </div>

@@ -1,11 +1,91 @@
-.container {
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
+$title-color: rgba(168, 143, 115, 0.34);
+$input-color: rgba(217, 217, 217, 0.5);
+$button-color: rgba(168, 143, 115, 0.34);
+
+@font-face {
+  font-family: montaga;
+  src: url("/fonts/Montaga-Regular.ttf");
 }
 
-.contact-container {
-    textarea {
-        margin-bottom: 20px;
+.container {
+  margin: 70px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+
+  * {
+    font-family: montaga;
+    letter-spacing: -0.41px;
+  }
+
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin-bottom: 30px;
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 310px;
+      height: 62px;
+      background-color: $title-color;
+      border-radius: 5px;
     }
+    p {
+      font-size: 12px;
+      font-weight: bolder;
+      margin: 0;
+    }
+  }
+  form {
+    width: 100%;
+    padding: 0 10%;
+    .form-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 8px;
+        label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            height: 26px;
+            border: 0;
+            background-color: $input-color;
+            color: black;
+            border-radius: 4px;
+        }
+      }
+      .action {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+            font-weight: 900;
+            color: black;
+            border: 0;
+            background: $button-color;
+            height: 40px;
+            width: 100px;
+            border-radius: 30px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+      }
+  }
+}
+
+#details {
+    height: 120px;
 }

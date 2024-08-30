@@ -66,6 +66,8 @@ $button-color: rgba(217, 217, 217, 1);
             justify-content: center;
             text-align: center;
             button {
+              color: black;
+              padding: 0;
               text-align: center;
               width: 100%;
               background-color: $button-color;
